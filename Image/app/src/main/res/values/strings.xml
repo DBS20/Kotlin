@@ -12,6 +12,6 @@
 
 
     //Image View Activity
-    <string name="txv_ImageViewActTitulo">- La Imagen -</string>
+    <string name="txv_ImageViewActTitulo">- Visualización -</string>
 
 </resources>
