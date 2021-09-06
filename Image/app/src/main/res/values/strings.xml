@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Image</string>
+
+    //Main Activity
+    <string name="txv_MainActTitulo">- Bienvenido -</string>
+    <string name="txv_MainActSubTitulo">Aquí encontrarás una gran selección de imágenes</string>
+
+    //Image Info Activity
+    <string name="txv_ImageInfoActTitulo">- Información -</string>
+    <string name="txv_ImageInfoActSubTitulo">Descripción detalla...</string>
+    <string name="txv_ImageInfoActText">Listado de datos</string>
+
+
+    //Image View Activity
+    <string name="txv_ImageViewActTitulo">- Visualización -</string>
+
+</resources>
