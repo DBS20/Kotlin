@@ -53,10 +53,11 @@
             app:layout_constraintEnd_toStartOf="@+id/edtxv_ImageInfoActText"
             app:layout_constraintBottom_toTopOf="parent"/>
 
-        <EditText
+        <TextView
             android:id="@+id/edtxv_ImageInfoActText"
             android:layout_width="170dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/txv_ImageInfoActText"
@@ -70,23 +71,17 @@
 
         <Button
             android:id="@+id/btn_View"
-            android:layout_width="100dp"
+            android:layout_width="160dp"
             android:layout_height="40dp"
+            android:layout_margin="20dp"
+            android:hint="@string/btn_titulo"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/edtxv_ImageInfoActText"
             app:layout_constraintEnd_toEndOf="@+id/edtxv_ImageInfoActText"
             app:layout_constraintStart_toStartOf="@+id/edtxv_ImageInfoActText"
             app:layout_constraintTop_toBottomOf="@+id/edtxv_ImageInfoActText"
             tools:ignore="TouchTargetSizeCheck" />
 
-        <Button
-            android:id="@+id/btn_Fav"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgv_Photo2"
-            app:layout_constraintStart_toStartOf="@+id/imgv_Photo2"
-            app:layout_constraintTop_toBottomOf="@+id/imgv_Photo2"
-            tools:ignore="TouchTargetSizeCheck" />
 
 
 

@@ -27,12 +27,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toStartOf="@+id/txv_MainActSubTitulo"/>
+            app:layout_constraintBottom_toTopOf="@+id/txv_MainActSubTitulo"/>
 
         <TextView
             android:id="@+id/txv_MainActSubTitulo"
             android:layout_width="280dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_margin="20dp"
             android:hint="@string/txv_MainActSubTitulo"
             android:textAlignment="center"
@@ -41,13 +41,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txv_MainActTitulo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toStartOf="@+id/imgv_Photo" />
+            app:layout_constraintBottom_toTopOf="@+id/imgv_Photo" />
 
         <ImageView
             android:id="@+id/imgv_Photo"
             android:layout_width="200dp"
             android:layout_height="300dp"
             android:layout_margin="20dp"
+            android:src="@drawable/blusa1"
             app:layout_constraintStart_toEndOf="@+id/btn_Preview"
             app:layout_constraintTop_toBottomOf="@+id/txv_MainActSubTitulo"
             app:layout_constraintEnd_toStartOf="@+id/btn_Next"
