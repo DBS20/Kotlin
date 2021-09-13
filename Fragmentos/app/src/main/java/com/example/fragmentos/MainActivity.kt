@@ -1,5 +1,6 @@
 package com.example.fragmentos
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -44,5 +45,7 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     }
+
+    fun playSound(sound: Int) = MediaPlayer.create(this, sound).start()
 
 }

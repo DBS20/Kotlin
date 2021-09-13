@@ -2,6 +2,7 @@ package com.example.fragmentos
 
 
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -22,7 +23,6 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
     private val ROPA_PREFS= "FAV_PRENDA" // nombre prenda favorita
     private lateinit var preferences: SharedPreferences //variable global para cuando se vaya a utilizar
     private val moshi = Moshi.Builder().build()//constructor Moshi para parcear el objeto ROPA
-
 
 
     override fun onResume() {
@@ -74,7 +74,7 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
     private lateinit var btn_Next: Button
     private lateinit var imgv_Photo: ImageView
     private lateinit var txv_subtitulo: TextView
-    private lateinit var btn_Fav: Button
+    private lateinit var imgv_fav: ImageView
 
 
 
@@ -85,7 +85,9 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
     //Boolean Fav
     var favoritoNOfavorito=false
 
-    //Función Visualización
+
+
+            //Función Visualización
     private fun initView() {
 
         //Binding por ID:
@@ -94,7 +96,7 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
         btn_Preview = requireView().findViewById(R.id.btn_Preview)
         btn_Next = requireView().findViewById(R.id.btn_Next)
         imgv_Photo = requireView().findViewById(R.id.imgv_Photo)
-        btn_Fav = requireView().findViewById(R.id.btn_Fav)
+        imgv_fav = requireView().findViewById(R.id.imgv_fav)
 
         //Cargar lista Prendas de Clase Ropa:
         ropa = prendas.misPrendas()
@@ -115,6 +117,8 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
                 }
 
             })
+
+            sound(R.raw.vistas)
         }
 
 
@@ -129,11 +133,12 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
         }
 
         //Favorito
-        btn_Fav.setOnClickListener{
+        imgv_fav.setOnClickListener{
             Favorito()
         }
 
     }
+
 
 
 
@@ -145,16 +150,16 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
 
         if(ropa[index].favorito==false)
         {
-            btn_Fav.hint="NO"
-            //btn_Fav.setBackgroundResource(R.drawable.ic_negra)
+            imgv_fav.setImageResource(R.drawable.ic_negra)
+
             favoritoNOfavorito=false
         }
         else
         {
             if(ropa[index].favorito==true)
             {
-                btn_Fav.hint="FAV"
-                //btn_Fav.setBackgroundResource(R.drawable.ic_amarilla)
+
+                imgv_fav.setImageResource(R.drawable.ic_amarilla)
                 favoritoNOfavorito=true
             }
         }
@@ -165,26 +170,25 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
 
     fun Favorito(){
 
+
         ropa[index]?.let {
 
             //saveFav(it)
             if(favoritoNOfavorito==false)
             {
                 favoritoNOfavorito=true
-                btn_Fav.hint="FAV"
-                //btn_Fav.setBackgroundResource(R.drawable.ic_amarilla)
+                imgv_fav.setImageResource(R.drawable.ic_amarilla)
                 ropa[index].favorito=true
-
+                sound(R.raw.fav)
             }
             else
             {
                 if(favoritoNOfavorito==true)
                 {
                     favoritoNOfavorito=false
-                    btn_Fav.hint="NO"
-                    //btn_Fav.setBackgroundResource(R.drawable.ic_negra)
+                    imgv_fav.setImageResource(R.drawable.ic_negra)
                     ropa[index].favorito=false
-
+                    sound(R.raw.nofav)
                 }
             }
 
@@ -199,6 +203,7 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
         if (index==0) index = ropa.size-1
         else index--
         setImagePrenda()
+        sound(R.raw.cambio)
     }
 
     //Función de Siguiente-Imagen
@@ -206,9 +211,10 @@ class ImageIn : Fragment(R.layout.fragment_image_in) {
         if (index== ropa.size-1 ) index=0
         else index++
         setImagePrenda()
-
+        sound(R.raw.cambio)
     }
 
+    fun sound(sound: Int) = (requireActivity() as MainActivity).playSound(sound)
 
 
 

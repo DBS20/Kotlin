@@ -47,6 +47,7 @@ class ImageInfo : Fragment(R.layout.fragment_image_info) {
         //Click para ver la imagen
         btn_View.setOnClickListener{
             ImageViewImage()
+            sound(R.raw.foto)
         }
 
         printData()
@@ -74,5 +75,7 @@ class ImageInfo : Fragment(R.layout.fragment_image_info) {
 
         })
     }
+
+    fun sound(sound: Int) = (requireActivity() as MainActivity).playSound(sound)
 
 }
