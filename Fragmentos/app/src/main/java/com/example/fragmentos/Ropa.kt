@@ -1,4 +1,4 @@
-package com.example.image
+package com.example.fragmentos
 
 import android.os.Parcelable
 import com.squareup.moshi.JsonClass

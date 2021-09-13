@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ImageIn">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_Image"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,25 +61,27 @@
             android:id="@+id/btn_Preview"
             android:layout_width="60dp"
             android:layout_height="40dp"
+            android:hint="P"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgv_Photo"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <Button
-        android:id="@+id/btn_Next"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toEndOf="@+id/imgv_Photo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            android:id="@+id/btn_Next"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:hint="N"
+            app:layout_constraintStart_toEndOf="@+id/imgv_Photo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <Button
             android:id="@+id/btn_Fav"
-            android:layout_width="150dp"
+            android:layout_width="60dp"
             android:layout_height="40dp"
-            android:hint=""
+            android:hint="n/f"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgv_Photo"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,4 +91,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

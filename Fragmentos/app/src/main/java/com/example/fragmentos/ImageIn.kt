@@ -1,20 +1,19 @@
-package com.example.image
+package com.example.fragmentos
 
-import android.content.Context
-import android.content.Intent
+
 import android.content.SharedPreferences
-import android.graphics.ImageDecoder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.squareup.moshi.Moshi
 
-class MainActivity : AppCompatActivity() {
+
+class ImageIn : Fragment(R.layout.fragment_image_in) {
+
 
     private lateinit var prendas: Ropa
 
@@ -24,11 +23,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var preferences: SharedPreferences //variable global para cuando se vaya a utilizar
     private val moshi = Moshi.Builder().build()//constructor Moshi para parcear el objeto ROPA
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        preferences = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-        prendas = getPrendaFav()
+
+
+    override fun onResume() {
+        super.onResume()
+
+
+
+        //preferences = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        //prendas = getPrendaFav()
         prendas = Ropa()
         index = 0
         initView()
@@ -37,30 +40,31 @@ class MainActivity : AppCompatActivity() {
         if(prendas.tipo.isNotEmpty())
             Favorito()
 
+
     }
 
     //Obtener Prenda
-    private fun getPrendaFav() =
+    /*private fun getPrendaFav() =
         preferences.getString(ROPA_PREFS, null)?.let {
-         return@let try{
-            moshi.adapter(Ropa::class.java).fromJson(it)
-         }catch (e: Exception){
-             Ropa()
-         }
-        } ?: Ropa()
+            return@let try{
+                moshi.adapter(Ropa::class.java).fromJson(it)
+            }catch (e: Exception){
+                Ropa()
+            }
+        } ?: Ropa()*/
 
 
 
 
 
     //Guardar favorito
-    private fun saveFav(prenda: Ropa?=null){
+    /*private fun saveFav(prenda: Ropa?=null){
         /*if (prenda != null) {
             prenda.misPrendas()
         }*/
         preferences.edit().putString(ROPA_PREFS, moshi.adapter(Ropa::class.java).toJson(prenda)).apply()
 
-    }
+    }*/
 
     //Vista:
     private lateinit var cl_Image: ConstraintLayout
@@ -85,12 +89,12 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
 
         //Binding por ID:
-        cl_Image = findViewById(R.id.cl_Image)
-        txv_subtitulo = findViewById(R.id.txv_MainActSubTitulo)
-        btn_Preview = findViewById(R.id.btn_Preview)
-        btn_Next = findViewById(R.id.btn_Next)
-        imgv_Photo = findViewById(R.id.imgv_Photo)
-        btn_Fav = findViewById(R.id.btn_Fav)
+        cl_Image = requireView().findViewById(R.id.cl_Image)
+        txv_subtitulo = requireView().findViewById(R.id.txv_MainActSubTitulo)
+        btn_Preview = requireView().findViewById(R.id.btn_Preview)
+        btn_Next = requireView().findViewById(R.id.btn_Next)
+        imgv_Photo = requireView().findViewById(R.id.imgv_Photo)
+        btn_Fav = requireView().findViewById(R.id.btn_Fav)
 
         //Cargar lista Prendas de Clase Ropa:
         ropa = prendas.misPrendas()
@@ -103,10 +107,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //Click sobre imagen para pasar a la Vista ImageInfoActivity
+        //Click sobre imagen para pasar a la Vista ImageInfo
         imgv_Photo.setOnClickListener{
-            ImageInfo()
+            (requireActivity() as MainActivity).replaceFragment(ImageInfo().apply {
+                arguments = Bundle().apply {
+                    putParcelable("selected Clothe", ropa[index])
+                }
+
+            })
         }
+
 
         //Funcionalidad botones: Preview y Next
         btn_Preview.setOnClickListener {
@@ -135,14 +145,16 @@ class MainActivity : AppCompatActivity() {
 
         if(ropa[index].favorito==false)
         {
-            btn_Fav.hint="@string/nofav"
+            btn_Fav.hint="NO"
+            //btn_Fav.setBackgroundResource(R.drawable.ic_negra)
             favoritoNOfavorito=false
         }
         else
         {
             if(ropa[index].favorito==true)
             {
-                btn_Fav.hint="@string/fav"
+                btn_Fav.hint="FAV"
+                //btn_Fav.setBackgroundResource(R.drawable.ic_amarilla)
                 favoritoNOfavorito=true
             }
         }
@@ -155,11 +167,12 @@ class MainActivity : AppCompatActivity() {
 
         ropa[index]?.let {
 
-            saveFav(it)
+            //saveFav(it)
             if(favoritoNOfavorito==false)
             {
                 favoritoNOfavorito=true
-                btn_Fav.hint="@string/fav"
+                btn_Fav.hint="FAV"
+                //btn_Fav.setBackgroundResource(R.drawable.ic_amarilla)
                 ropa[index].favorito=true
 
             }
@@ -168,7 +181,8 @@ class MainActivity : AppCompatActivity() {
                 if(favoritoNOfavorito==true)
                 {
                     favoritoNOfavorito=false
-                    btn_Fav.hint="@string/nofav"
+                    btn_Fav.hint="NO"
+                    //btn_Fav.setBackgroundResource(R.drawable.ic_negra)
                     ropa[index].favorito=false
 
                 }
@@ -195,13 +209,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //Función que manda el componente elegido a la otra actividad
-    fun ImageInfo()
-    {
-        val intent = Intent(this, ImageInfoActivity::class.java)
-        intent.putExtra("lista",ropa[index])
-        startActivity(intent)
-    }
+
+
 
 
 

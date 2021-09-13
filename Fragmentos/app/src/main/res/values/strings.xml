@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Image</string>
+    <string name="app_name">Fragmentos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     //Main Activity
     <string name="txv_MainActTitulo">- Bienvenido -</string>
@@ -18,9 +21,5 @@
 
     //Image View Activity
     <string name="txv_ImageViewActTitulo">- Visualización -</string>
-
-
-
-    <string name="empty_text"></string>
 
 </resources>
